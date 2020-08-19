@@ -1,6 +1,11 @@
 name: Example action
 
-on: [push]
+on:
+  push:
+    paths-ignore:  # Don't trigger deployment when any of these files/folders changes.
+      - 'README.md'
+    branches:
+      - master
 
 jobs:
   build:
@@ -18,4 +23,4 @@ jobs:
       run: |
         kubectl cluster-info
         kubectl create deployment --image nginx my-nginx
-        kubectl get po
+        kubectl get pods
